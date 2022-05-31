@@ -1,22 +1,20 @@
 package org.example;
 
+import java.util.Iterator;
+
+/**
+ * Простой класс поиска максимального значения, создан для изучения JUnit
+ */
 public class Statistics {
-    private final int[] data;
-
-    public static void main(String[] args) {
-        Statistics stat = new Statistics(new int[]{5, 7, 12, 1});
-        System.out.println(stat.getMax());
-    }
-
-    public Statistics(int[] data) {
-        this.data = data;
-    }
-
-    public int getMax(){
-        int max = data[0];
-        for(int d : data){
-            max = (d>max)?d:max;
+    public static int getMax(Iterable<Integer> list){
+        int max = Integer.MIN_VALUE;
+        for(Integer i : list){
+            max = (i>max)?i:max;
         }
         return max;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Statistics.getMax(IntegerFactory.createIntegerArray(10)));
     }
 }
