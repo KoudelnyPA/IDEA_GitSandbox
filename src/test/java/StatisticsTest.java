@@ -1,6 +1,9 @@
+import org.example.IntegerFactory;
 import org.example.Statistics;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -24,6 +27,17 @@ public class StatisticsTest {
         Iterable<Integer> data = createTestIntegerArray(TestArrayType.MAX_END);
         int expected = 89;
         int actual = Statistics.getMax(data);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetMaxMockFirst(){
+        // {23, 4, 7}
+        IntegerFactory factory = Mockito.mock(IntegerFactory.class);//createTestIntegerArray(TestArrayType.MAX_FIRST);
+        Iterable<Integer> data = createTestIntegerArray(TestArrayType.MAX_FIRST);
+        Mockito.doReturn(data).when(factory).createIntegerArray(3);
+        int expected = 23;
+        int actual = Statistics.getMax(data/*factory.createIntegerArray(3)*/);
         Assertions.assertEquals(expected, actual);
     }
 
